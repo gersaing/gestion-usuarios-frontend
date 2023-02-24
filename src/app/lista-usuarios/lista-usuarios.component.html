@@ -1,0 +1,35 @@
+<div class="card">
+    <app-navegador></app-navegador>
+    <p-panel header="Lista de usuarios" [style]="{width:'70'}">
+        <p-table [value]="usuarios" [paginator]="false" [columns]="cols" [rows]="1" [showCurrentPageReport]="true" [tableStyle]="{'min-width': '50rem'}" 
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor = "let col of columns">
+                        {{col.header}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-usuario>
+                <tr>
+                    <td>{{usuario.nombreUsuario}}</td>
+                    <td>{{usuario.correo}}</td>
+                    <td>{{usuario.perfil.descripcion}}</td>   
+                </tr>
+               
+            </ng-template>
+        </p-table>
+        <div class="mb-3">
+            <p-button type="button" icon="pi pi-chevron-left" (click)="prev()" [disabled]="isFirst" styleClass="p-button-text" id="boton" ></p-button>
+            <p-button type="button" icon="pi pi-chevron-right" (click)="next()" [disabled]="isLast" styleClass="p-button-text"></p-button>   
+        </div>
+        <div class="mb-3">
+            <span *ngFor ="let p of totalPages; let i = index">
+                <a style="cursor: pointer;" (click)="setPage(i)">{{i+1}} &nbsp;&nbsp;&nbsp;&nbsp;</a>
+            </span>
+        </div>
+    </p-panel>
+    
+</div>
+
+

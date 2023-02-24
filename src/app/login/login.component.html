@@ -1,0 +1,27 @@
+<div class="wraper">
+    <div *ngIf="!loading" class="body">
+        <img class="logo" src="../../assets/imagenes/login.png" alt="login">
+        <h1>Login</h1>
+        <form (ngSubmit)="submitFormulario()" [formGroup]="myForm" >
+            <div class="form-floating mb-3">
+                <input type="text" formControlName="nombreUsuario" class="form-control" placeholder="name@example.com">
+                <label>usuario</label>
+                <span *ngIf="myForm.get('nombreUsuario')?.hasError('required') && myForm.get('nombreUsuario')?.touched " class="text-danger errorLabel">
+                    El <strong>usuario</strong> es requerido
+                </span>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" formControlName="clave" class="form-control" placeholder="Password">
+                <label>Password</label>
+                <span *ngIf="myForm.get('clave')?.hasError('required') && myForm.get('clave')?.touched "  class="text-danger errorLabel">
+                    La <strong>password</strong> es requerida
+                </span>
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg" >Iniciar sesion</button>
+            </div>         
+        </form>
+    </div>
+    <app-spinner *ngIf="loading"></app-spinner>
+</div>
+

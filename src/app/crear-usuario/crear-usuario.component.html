@@ -1,0 +1,66 @@
+<app-navegador></app-navegador>
+<div class="wraper">
+    <div *ngIf="!loading" class="body">
+
+        <h1>Crear Usuario</h1>
+        <form (ngSubmit)="handleClick()" [formGroup]="myForm">
+            <div class="form-floating mb-3">
+                <input type="text" formControlName="nombreUsuario" class="form-control" placeholder="name@example.com">
+                <label>usuario</label>
+                <span *ngIf="myForm.get('nombreUsuario')?.hasError('required') && myForm.get('nombreUsuario')?.touched "
+                    class="text-danger errorLabel">
+                    El usuario es requerido
+                </span>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" formControlName="clave" class="form-control" placeholder="Contraseña">
+                <label>Contraseña</label>
+                <span *ngIf="myForm.get('clave')?.hasError('required') && myForm.get('clave')?.touched "
+                    class="text-danger errorLabel">
+                    La contraseña es requerida
+                </span>
+                <span *ngIf="myForm.get('clave')?.hasError('pattern') && myForm.get('clave')?.touched "
+                    class="text-danger errorLabel">
+                    La contraseña debe incluir mayusculas - minusculas, un numero y al menos 8 caracters
+                </span>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" formControlName="confirmarClave" class="form-control"
+                    placeholder="Confrimar contraseña">
+                <label>Confirmar contraseña</label>
+                <span
+                    *ngIf="myForm.get('confirmarClave')?.hasError('required') && myForm.get('confirmarClave')?.touched "
+                    class="text-danger errorLabel">
+                    La confirmacion de password es requerida
+                </span>
+                <span *ngIf="myForm.get('clave')?.hasError('pattern') && myForm.get('confirmarClave')?.touched "
+                    class="text-danger errorLabel">
+                    La contraseña debe incluir mayusculas - minusculas, un numero y al menos 8 caracters
+                </span>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" formControlName="correo" class="form-control" placeholder="name@example.com">
+                <label>correo</label>
+                <span *ngIf="myForm.get('correo')?.hasError('required') && myForm.get('correo')?.touched "
+                    class="text-danger errorLabel">
+                    El correo es requerido
+                </span>
+                <span *ngIf="myForm.get('correo')?.hasError('email') && myForm.get('correo')?.touched "
+                    class="text-danger errorLabel">
+                    Ingrese un email valido
+                </span>
+            </div>
+
+            <p-dropdown class="field col-12 md:col-4" inputId="id" [autoDisplayFirst]="false" [options]="perfiles"
+                [(ngModel)]="perfil" [ngModelOptions]="{standalone: true}" optionLabel="descripcion" class="ng-invalid ng-dirty"
+                placeholder="Perfil"></p-dropdown>
+
+            <div class="d-grid gap-2"> 
+                <button type="submit" class="btn btn-primary btn-lg">CREAR USUARIO</button>
+            </div>
+        </form>
+    </div>
+    <app-spinner *ngIf="loading"></app-spinner>
+</div>
+
+
